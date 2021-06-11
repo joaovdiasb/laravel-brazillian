@@ -6,32 +6,26 @@ class Cpf
 {
   public function isValid($value): bool
   {
-    $c = preg_replace('/\D/', '', $value);
+    // Extrai somente os números
+    $cpf = preg_replace('/\D/', '', $value);
 
-    if (mb_strlen($c) != 11 || preg_match("/^{$c[0]}{11}$/", $c)) {
-      return false;
-    }
+    // Verifica se foi informado todos os digitos corretamente
+    if (strlen($cpf) != 11) return false;
 
-    for (
-      $s = 10, $n = 0, $i = 0;
-      $s >= 2;
-      $n += $c[$i++] * $s--
-    ) {
-    }
+    // Verifica se foi informada uma sequência de digitos repetidos. Ex: 111.111.111-11
+    if (preg_match('/(\d)\1{10}/', $cpf)) return false;
 
-    if ($c[9] != ((($n %= 11) < 2) ? 0 : 11 - $n)) {
-      return false;
-    }
+    // Faz o calculo para validar o CPF
+    for ($t = 9; $t < 11; $t++) {
+      for ($d = 0, $c = 0; $c < $t; $c++) {
+        $d += $cpf[$c] * (($t + 1) - $c);
+      }
 
-    for (
-      $s = 11, $n = 0, $i = 0;
-      $s >= 2;
-      $n += $c[$i++] * $s--
-    ) {
-    }
+      $d = ((10 * $d) % 11) % 10;
 
-    if ($c[10] != ((($n %= 11) < 2) ? 0 : 11 - $n)) {
-      return false;
+      if ($cpf[$c] != $d) {
+        return false;
+      }
     }
 
     return true;
