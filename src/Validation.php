@@ -89,11 +89,11 @@ class Validation extends Validator
 
   protected function validateTelefoneCelularComDdd($attribute, $value): bool
   {
-    return ((new Telefone)->isValidWithDdd($value) && (new Celular)->isValidWithDdd($value));
+    return ((new Telefone)->isValidWithDdd($value) || (new Celular)->isValidWithDdd($value));
   }
 
   protected function validateTelefoneCelularComCodigo($attribute, $value): bool
   {
-    return ((new Telefone)->isValidWithCode($value) && (new Celular)->isValidWithCode($value));
+    return ((new Telefone)->isValidWithCode($value) || (new Celular)->isValidWithCode($value));
   }
 }
