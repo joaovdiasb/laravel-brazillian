@@ -21,6 +21,12 @@ class ApiCep extends Http
 
   public function setCep(string $cep): self
   {
+    $cep = preg_replace('/\D/', '', $cep);
+
+    if (strlen($cep) !== 8) {
+      throw CepException::invalidLength($cep);
+    }
+
     $this->cep = $cep;
 
     return $this;
@@ -39,7 +45,7 @@ class ApiCep extends Http
         continue;
       }
 
-      if (optional($body)[$service['expect_key']] === $this->cep) {
+      if (optional($body)[$service['expectKey']] === $this->cep) {
         return $body;
       } elseif (optional($client)->getStatusCode()) {
         throw CepException::notFound($this->cep);
@@ -55,14 +61,14 @@ class ApiCep extends Http
       [
         'baseUrl' => 'viacep.com.br/ws/',
         'url' => "{$parsedCep}/json/",
-        'expect_key' => 'cep'
+        'expectKey' => 'cep'
       ],
       [
         'baseUrl' => 'ws.apicep.com/busca-cep/api/cep.json?',
         'query' => [
           'code' => $parsedCep
         ],
-        'expect_key' => 'code'
+        'expectKey' => 'code'
       ]
     ];
   }

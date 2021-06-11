@@ -10,4 +10,9 @@ class CepException extends Exception
   {
     return new static("CEP \"{$cep}\" não encontrado na base da dados dos Correios");
   }
+
+  public static function invalidLength(): self
+  {
+    return new static("Formato do CEP inválido");
+  }
 }

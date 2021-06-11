@@ -9,7 +9,8 @@ class Cep
   public function isValid($value): bool
   {
     try {
-      (new ApiCep)->setCep($value)->search();
+      (new ApiCep)->setCep($value)
+        ->search();
     } catch (\Exception $e) {
       return false;
     }
