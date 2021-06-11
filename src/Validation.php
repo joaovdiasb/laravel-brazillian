@@ -3,7 +3,7 @@
 namespace Joaovdiasb\LaravelBrazillian;
 
 use Illuminate\Validation\Validator;
-use joaovdiasb\LaravelBrazillian\Rules\{Cnpj, Cpf};
+use Joaovdiasb\LaravelBrazillian\Rules\{Cep, Cpf, Cnpj};
 
 class Validation extends Validator
 {
@@ -22,18 +22,28 @@ class Validation extends Validator
     return $this->validateFormatoCpf($attribute, $value) || $this->validateFormatoCnpj($attribute, $value);
   }
 
+  protected function validateFormatoCep($attribute, $value): bool
+  {
+    return preg_match('/[0-9]{5}-[\d]{3}/', $value) > 0;
+  }
+
   protected function validateCpf($attribute, $value): bool
   {
-    return (new Cpf)->validateCpf($attribute, $value);
+    return (new Cpf)->isValid($value);
   }
 
   protected function validateCnpj($attribute, $value): bool
   {
-    return (new Cnpj)->validateCnpj($attribute, $value);
+    return (new Cnpj)->isValid($value);
   }
 
   protected function validateCpfCnpj($attribute, $value): bool
   {
-    return ((new Cpf)->validateCpf($attribute, $value) || (new Cnpj)->validateCnpj($attribute, $value));
+    return ((new Cpf)->isValid($value) || (new Cnpj)->isValid($value));
+  }
+
+  protected function validateCep($attribute, $value): bool
+  {
+    return (new Cep)->isValid($value);
   }
 }

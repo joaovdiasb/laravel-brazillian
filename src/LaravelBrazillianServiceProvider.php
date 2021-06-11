@@ -38,9 +38,11 @@ class LaravelBrazillianServiceProvider extends ServiceProvider
             'cnpj' => 'CNPJ inválido.',
             'cpf' => 'CPF inválido.',
             'cpf_cnpj' => 'CPF ou CNPJ inválido.',
+            'cep' => 'CEP inválido.',
             'formato_cnpj' => 'Formato inválido para CNPJ.',
             'formato_cpf' => 'Formato inválido para CPF.',
             'formato_cpf_cnpj' => 'Formato inválido para CPF ou CNPJ.',
+            'formato_cep' => 'Formato inválido para CEP.',
         ];
     }
 

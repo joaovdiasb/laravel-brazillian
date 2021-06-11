@@ -1,10 +1,10 @@
 <?php
 
-namespace joaovdiasb\LaravelBrazillian\Rules;
+namespace Joaovdiasb\LaravelBrazillian\Rules;
 
 class Cnpj
 {
-  public function validateCnpj($attribute, $value): bool
+  public function isValid($value): bool
   {
     $c = preg_replace('/\D/', '', $value);
 
