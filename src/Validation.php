@@ -9,22 +9,22 @@ class Validation extends Validator
 {
   protected function validateFormatoCpf($attribute, $value): bool
   {
-    return preg_match('/^\d{3}\.\d{3}\.\d{3}-\d{2}$/', $value) > 0;
+    return (new Cpf)->isValidFormat($value);
   }
 
   protected function validateFormatoCnpj($attribute, $value): bool
   {
-    return preg_match('/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/', $value) > 0;
+    return (new Cnpj)->isValidFormat($value);
   }
 
   protected function validateFormatoCpfCnpj($attribute, $value): bool
   {
-    return $this->validateFormatoCpf($attribute, $value) || $this->validateFormatoCnpj($attribute, $value);
+    return (new Cpf)->isValidFormat($value) || (new Cnpj)->isValidFormat($value);
   }
 
   protected function validateFormatoCep($attribute, $value): bool
   {
-    return preg_match('/[0-9]{5}-[\d]{3}/', $value) > 0;
+    return (new Cep)->isValidFormat($value);
   }
 
   protected function validateCpf($attribute, $value): bool

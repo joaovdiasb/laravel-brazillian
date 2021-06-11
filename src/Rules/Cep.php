@@ -16,4 +16,9 @@ class Cep
 
     return true;
   }
+
+  public function isValidFormat($value): bool
+  {
+    return preg_match('/[0-9]{5}-[\d]{3}/', $value) > 0;
+  }
 }

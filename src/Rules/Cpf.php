@@ -30,4 +30,9 @@ class Cpf
 
     return true;
   }
+
+  public function isValidFormat($value): bool
+  {
+    return preg_match('/^\d{3}\.\d{3}\.\d{3}-\d{2}$/', $value) > 0;
+  }
 }
