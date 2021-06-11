@@ -55,18 +55,16 @@ class ApiCep extends Http
 
   private function services(): array
   {
-    $parsedCep = preg_replace('/[^0-9]/', '', $this->cep);
-
     return [
       [
         'baseUrl' => 'viacep.com.br/ws/',
-        'url' => "{$parsedCep}/json/",
+        'url' => "{$this->cep}/json/",
         'expectKey' => 'cep'
       ],
       [
         'baseUrl' => 'ws.apicep.com/busca-cep/api/cep.json?',
         'query' => [
-          'code' => $parsedCep
+          'code' => $this->cep
         ],
         'expectKey' => 'code'
       ]
