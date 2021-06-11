@@ -1,0 +1,58 @@
+{
+    "name": "joaovdiasb/laravel-brazillian",
+    "description": "",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+		"laravel",
+		"brazillian",
+		"pt-br",
+		"cep",
+		"cpf",
+		"cnpj"
+	],
+    "authors": [
+        {
+            "name": "João Victor Dias Bittencourt",
+            "email": "j.v_dias@hotmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable":true,
+    "require": {},
+    "require-dev": {
+        "illuminate/http": "^7.0",
+        "nunomaduro/collision": "^4.0",
+        "orchestra/testbench": "^5.0",
+        "phpunit/phpunit": "9.4",
+        "symfony/thanks": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Joaovdiasb\\LaravelBrazillian\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Joaovdiasb\\LaravelBrazillian\\Tests\\":"tests/"
+        }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Joaovdiasb\\LaravelBrazillian\\LaravelBrazillianServiceProvider"
+            ],
+            "aliases": {
+                "Joaovdiasb": "Joaovdiasb\\LaravelBrazillian\\LaravelBrazillianFacade"
+            }
+        }
+    }
+}
