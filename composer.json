@@ -22,6 +22,7 @@
     "require": {},
     "require-dev": {
         "illuminate/http": "^7.0",
+        "illuminate/support": "^7.0",
         "nunomaduro/collision": "^4.0",
         "orchestra/testbench": "^5.0",
         "phpunit/phpunit": "9.4",

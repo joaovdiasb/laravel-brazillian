@@ -13,6 +13,6 @@ class CepException extends Exception
 
   public static function invalidLength(): self
   {
-    return new static("Formato do CEP inválido");
+    return new static("Tamanho do CEP inválido");
   }
 }

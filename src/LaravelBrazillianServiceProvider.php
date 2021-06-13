@@ -2,6 +2,7 @@
 
 namespace Joaovdiasb\LaravelBrazillian;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use Joaovdiasb\LaravelBrazillian\Validation;
 
@@ -15,9 +16,7 @@ class LaravelBrazillianServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/laravel-brazillian.php', 'laravel-brazillian');
-
         $this->publishConfig();
-
         $this->registerRules();
     }
 
@@ -28,7 +27,9 @@ class LaravelBrazillianServiceProvider extends ServiceProvider
         $this->app['validator']->resolver(function ($translator, $data, $rules, $messages, $attributes) use ($ruleMessages) {
             $messages += $ruleMessages;
 
-            return new Validation($translator, $data, $rules, $messages, $attributes);
+            return in_array(App::environment(), config('laravel-brazillian.ignore_validation_on_env') ?? []) 
+                ? new Validation\DefaultValidation($translator, $data, $rules, $messages, $attributes)
+                : new Validation\CustomValidation($translator, $data, $rules, $messages, $attributes);
         });
     }
 
