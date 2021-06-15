@@ -1,11 +1,11 @@
 <?php
 
-namespace Joaovdiasb\LaravelBrazillian;
+namespace Joaovdiasb\LaravelBrazillian\Validation;
 
 use Illuminate\Validation\Validator;
 use Joaovdiasb\LaravelBrazillian\Rules\{Cep, Cpf, Cnpj, Telefone, Celular, Uf};
 
-class Validation extends Validator
+class CustomValidation extends Validator
 {
   protected function validateFormatoCpf($attribute, $value): bool
   {
