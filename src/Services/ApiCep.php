@@ -21,9 +21,7 @@ class ApiCep extends Http
 
   public function setCep(string $cep): self
   {
-    $cep = preg_replace('/\D/', '', $cep);
-
-    if (strlen($cep) !== 8) {
+    if (strlen(preg_replace('/[^0-9]/', '', $cep)) !== 8) {
       throw CepException::invalidLength($cep);
     }
 
@@ -55,16 +53,18 @@ class ApiCep extends Http
 
   private function services(): array
   {
+    $cep = preg_replace('/[^0-9]/', '', $this->cep);
+
     return [
       [
         'baseUrl' => 'viacep.com.br/ws/',
-        'url' => "{$this->cep}/json/",
+        'url' => "{$cep}/json/",
         'expectKey' => 'cep'
       ],
       [
         'baseUrl' => 'ws.apicep.com/busca-cep/api/cep.json?',
         'query' => [
-          'code' => $this->cep
+          'code' => $cep
         ],
         'expectKey' => 'code'
       ]
