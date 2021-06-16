@@ -64,10 +64,7 @@ class LaravelBrazillianServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // Register facade
-        $this->app->singleton('laravel-brazillian', function () {
-            return new LaravelBrazillian;
-        });
+        //
     }
 
     /**
