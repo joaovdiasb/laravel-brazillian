@@ -5,6 +5,7 @@ namespace Joaovdiasb\LaravelBrazillian\Services;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 use Joaovdiasb\LaravelBrazillian\Exceptions\CepException;
+use Throwable;
 
 class ApiCep extends Http
 {
@@ -32,20 +33,22 @@ class ApiCep extends Http
 
   public function search()
   {
-    foreach ($this->services() as $service) {
+    foreach ($this->services() as $index => $service) {
       try {
         $client = $this->client
           ->baseUrl($service['baseUrl'])
           ->get($service['url'] ?? '', $service['query'] ?? '');
 
         $body = json_decode($client->body(), true);
-      } catch (\Exception $e) {
+      } catch (\Throwable $e) {
         continue;
       }
 
       if (optional($body)[$service['expectKey']] === $this->cep) {
         return $body;
-      } elseif (optional($client)->getStatusCode()) {
+      }
+      
+      if ($index === (count($this->services()) - 1)) {
         throw CepException::notFound($this->cep);
       }
     }
