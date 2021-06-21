@@ -11,7 +11,7 @@ class Celular
 
   public function isValidWithDdd($value): bool
   {
-    return preg_match('/^\(\d{2}\)\s?\d{4}-\d{4,5}$/', $value) > 0;
+    return preg_match('/^\(\d{2}\)\s?\d{4,5}-\d{4}$/', $value) > 0;
   }
 
   public function isValidWithCode($value): bool

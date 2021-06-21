@@ -50,10 +50,7 @@
         "laravel": {
             "providers": [
                 "Joaovdiasb\\LaravelBrazillian\\LaravelBrazillianServiceProvider"
-            ],
-            "aliases": {
-                "Joaovdiasb": "Joaovdiasb\\LaravelBrazillian\\LaravelBrazillianFacade"
-            }
+            ]
         }
     }
 }
